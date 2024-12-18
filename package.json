@@ -12,6 +12,7 @@
     "vite": "^6.0.1"
   },
   "dependencies": {
-    "portfolio-3d": "file:"
+    "portfolio-3d": "file:",
+    "three": "^0.171.0"
   }
 }
