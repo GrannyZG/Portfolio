@@ -11,7 +11,7 @@
       body {
         margin: 0;
         overflow: hidden;
-        background: linear-gradient(to bottom, #75c8ff, #9fffd7); /* Bijelo-sivi gradient */
+        background: linear-gradient(to bottom, #75c8ff, #9fffd7); 
       }
       button {
           z-index: 1;
@@ -22,7 +22,7 @@
           background: linear-gradient(to bottom, #005bbb, #004499);
           transform: scale(1.05);
       }
-      /* Glavna pozadina modala */
+      
       .modal {
         display: none;
         position: fixed;
@@ -34,7 +34,7 @@
         z-index: 1000;
       }
     
-      /* Sadržaj modala */
+      
       .modal-content {
         background: #ffffff;
         margin: 10% auto;
@@ -46,8 +46,8 @@
         text-align: center;
         animation: fadeIn 0.5s;
         position: relative;
-        max-height: 60vh; /* Ograničava visinu na 80% visine ekrana */
-        overflow: auto;   /* Dodaje skrolanje ako je sadržaj veći */
+        max-height: 60vh; 
+        overflow: auto;   
         font-family: 'Poppins', sans-serif;
       }
 
@@ -59,29 +59,28 @@
         color: #166cc9;
       }
       
-            /* Stilizacija liste unutar modala */
-      /* Stilizacija liste unutar modala */
+      
       .modal-content ul {
-        list-style-position: inside; /* Pomakni bullet točke bliže tekstu */
-        padding-left: 0;             /* Ukloni dodatni padding ul elementa */
+        list-style-position: inside;
+        padding-left: 0;             
         margin-left: 0;   
       }
 
       .modal-content li {
-        margin: 5px 0;               /* Postavi manji vertikalni razmak između stavki */
+        margin: 5px 0;               
         padding-left: 5px;    
       }
       .modal-content.skill ul{
-        list-style: none; /* Ukloni defaultne bullet točke */
+        list-style: none; 
         padding: 0;
         margin: 0;
       }
 
       .modal-content.skill li{
-        display: flex; /* Flexbox za horizontalno poravnanje */
-        justify-content: space-between; /* Razmak između imena vještine i točkica */
-        align-items: center; /* Vertikalno centriranje */
-        margin: 10px 0; /* Razmak između stavki */
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        margin: 10px 0;
       }
       .skill-name {
         font-size: 16px;
@@ -89,23 +88,23 @@
       }
 
       .dots {
-        display: flex; /* Postavi točkice horizontalno */
-        gap: 5px; /* Razmak između točkica */
+        display: flex; 
+        gap: 5px; 
       }
 
       .dot {
         width: 15px;
         height: 15px;
         border-radius: 50%;
-        background-color: #ddd; /* Siva boja za prazne točke */
+        background-color: #ddd; 
       }
 
       .dot.filled {
-        background-color: #0078ff; /* Plava boja za popunjene točke */
+        background-color: #0078ff; 
       }
 
 
-      /* Zatvaranje modala (X gumb) */
+      
       .close-button {
         position: absolute;
         top: 10px;
@@ -120,7 +119,7 @@
         color: #0078ff;
       }
     
-      /* Slika unutar modala */
+      
       .modal-image {
         width: 100%;
         max-width: 200px;
@@ -133,7 +132,7 @@
         display: none;
       }
     
-      /* Responzivnost */
+      
       @media (max-width: 600px) {
         .modal-content {
           width: 95%;
@@ -147,7 +146,7 @@
         }
       }
     
-      /* Animacija */
+     
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -159,43 +158,43 @@
         }
       }
       
-      /* Stil za animirani naslov */
+     
       .animated-title {
         position: absolute;
-        top: 20px; /* Postavi naslov na vrh stranice */
-        left: 50%; /* Centriraj naslov horizontalno */
-        transform: translateX(-50%); /* Poravnaj naslov prema sredini */
-        z-index: 1; /* Prikaži iznad ostalih elemenata */
+        top: 20px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        z-index: 1; 
         text-align: center;
         font-family: 'Arial', sans-serif;
-        font-size: 2.5rem; /* Veličina naslova */
+        font-size: 2.5rem; 
         font-weight: bold;
         color: #0078ff;
         animation: fadeInUp 2s ease-out;
       }
       .animated-title h1 {
-        font-family: 'Great Vibes', cursive; /* Krasopisni font */
-        font-size: 3.5rem; /* Povećaj veličinu teksta za bolji učinak */
-        color: #0d3edf; /* Promijeni boju za elegantan izgled */
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Dodaj suptilnu sjenu */
+        font-family: 'Great Vibes', cursive; 
+        font-size: 3.5rem; 
+        color: #0d3edf; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
         font-weight: 450;
         
       }
       
-      /* Animacija za fade-in i pomak prema gore */
+      
       @keyframes fadeInUp {
         from {
           opacity: 0;
-          transform: translateX(-50%) translateY(20px); /* Početni pomak dolje */
+          transform: translateX(-50%) translateY(20px); 
         }
         to {
           opacity: 1;
-          transform: translateX(-50%) translateY(0); /* Završna pozicija */
+          transform: translateX(-50%) translateY(0);
         }
       }
 
 
-            /* Mala slika unutar modala */
+           
       .image-container {
         display: flex;
         justify-content: center;
@@ -204,7 +203,7 @@
       }
 
       .thumbnail {
-        width: 100px; /* Veličina malog kvadrata */
+        width: 100px; 
         height: 100px;
         object-fit: cover;
         cursor: pointer;
@@ -213,12 +212,12 @@
       }
 
       .thumbnail:hover {
-        transform: scale(1.1); /* Povećanje na hover */
+        transform: scale(1.1); 
       }
 
-      /* Modal za punu rezoluciju slike */
+      
       .image-modal {
-        display: none; /* Skriveno dok nije aktivno */
+        display: none; 
         position: fixed;
         top: 0;
         left: 0;
@@ -255,13 +254,13 @@
         position: fixed;
         bottom: 10px;
         right: 10px;
-        background-color: rgba(0, 0, 0, 0.7); /* Poluprozirna pozadina */
+        background-color: rgba(0, 0, 0, 0.7); 
         color: white;
         padding: 5px 10px;
         border-radius: 5px;
         font-size: 14px;
         font-family: Arial, sans-serif;
-        z-index: 1000; /* Prikaz iznad ostalih elemenata */
+        z-index: 1000; 
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
       }
       
@@ -271,23 +270,23 @@
         font-size: 16px;
         font-weight: bold;
         color: white;
-        background: linear-gradient(to right, #5eace0, #267ae7); /* Zeleni gradijent */
+        background: linear-gradient(to right, #5eace0, #267ae7);
         border: none;
-        border-radius: 25px; /* Zaobljeni rubovi */
+        border-radius: 25px; 
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.3s ease;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Suptilna sjena */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
       }
       
       .project button:hover {
-        transform: scale(1.1); /* Povećanje na hover */
-        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* Pojačana sjena na hover */
-        background: linear-gradient(to right, #2d6488, #224f8a); /* Promjena boje na hover */
+        transform: scale(1.1); 
+        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); 
+        background: linear-gradient(to right, #2d6488, #224f8a);
       }
       
       .project button:active {
-        transform: scale(1.05); /* Lagano smanjenje na klik */
-        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); /* Smanjena sjena na klik */
+        transform: scale(1.05); 
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); 
       }
       
     </style>
@@ -298,13 +297,13 @@
       function openImageModal(src) {
         const imageModal = document.getElementById('image-modal');
         const fullImage = document.getElementById('full-image');
-        fullImage.src = src; // Postavi izvor slike
-        imageModal.style.display = 'flex'; // Prikaži modal
+        fullImage.src = src; 
+        imageModal.style.display = 'flex'; 
       }
       
       function closeImageModal() {
         const imageModal = document.getElementById('image-modal');
-        imageModal.style.display = 'none'; // Sakrij modal
+        imageModal.style.display = 'none';
       }
       
     </script>
