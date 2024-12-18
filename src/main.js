@@ -10,7 +10,7 @@ canvas.height = 512;
 
 const context = canvas.getContext('2d');
 
-// Dodaj gradijent
+// Dodaj gradient
 const gradient = context.createLinearGradient(0, 0, 0, canvas.height);
 gradient.addColorStop(0, '#75c8ff'); // Gornja boja
 gradient.addColorStop(1, '#9fffd7'); // Donja boja
@@ -33,9 +33,9 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.1;
-controls.enablePan = false; // Onemogući desni klik za pomicanje scene
+controls.enablePan = false; 
 
-// Učitavanje teksture
+
 const textureLoader = new THREE.TextureLoader();
 const texture = textureLoader.load('/textures/wood.jpg');
 
@@ -48,17 +48,17 @@ function createTexturedText(text) {
   if (texture.image) {
       context.drawImage(texture.image, 0, 0, canvas.width, canvas.height);
   } else {
-      context.fillStyle = '#dcdcdc'; // Ako slika nije još učitana, koristi sivo
+      context.fillStyle = '#dcdcdc'; 
       context.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  // Dodaj prozirni sloj za bolju čitljivost teksta
+
   context.fillStyle = 'rgb(207, 207, 161)';
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   // Nacrtaj tekst
   context.font = 'bold 60px Arial';
-  context.fillStyle = '#333333'; // Tamno siva boja
+  context.fillStyle = '#333333'; 
   context.textAlign = 'center';
   context.textBaseline = 'middle';
   context.fillText(text, canvas.width / 2, canvas.height / 2);
@@ -71,7 +71,7 @@ function createTexturedText(text) {
   return new THREE.CanvasTexture(canvas);
 }
 
-// Kreiramo materijale s tekstom za svaku stranu kocke
+
 const materials = [
   new THREE.MeshBasicMaterial({ map: createTexturedText('Personal Info') }), // Prednja
   new THREE.MeshBasicMaterial({ map: createTexturedText('Education') }),     // Desna
@@ -84,7 +84,7 @@ const materials = [
 const vertexShader = `
   varying vec3 vPosition;
   void main() {
-    vPosition = position; // Proslijedi poziciju verteksa u fragment shader
+    vPosition = position; 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `;
@@ -104,7 +104,7 @@ const fragmentShader = `
 const gradientMaterial = new THREE.ShaderMaterial({
   vertexShader: vertexShader,
   fragmentShader: fragmentShader,
-  side: THREE.DoubleSide // Omogućuje prikaz gradijenta na svim stranama
+  side: THREE.DoubleSide // Omogucuje prikaz gradijenta na svim stranama
 });
 
 // Kocka s teksturom
@@ -145,7 +145,7 @@ function detectSide() {
 // Funkcija za otvaranje modala iz HTML-a
 function openModal(detectedSide) {
     const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => modal.style.display = 'none'); // Zatvori sve modale
+    modals.forEach(modal => modal.style.display = 'none'); 
 
     const modal = document.getElementById(`${detectedSide.replace(/\s+/g, '-')}-modal`);
     if (modal) {
@@ -161,7 +161,7 @@ function animate() {
 }
 animate();
 
-// Dinamični gumb
+// Dinamicni gumb
 const button = document.createElement('button');
 button.innerText = 'Open';
 button.style.position = 'absolute';
