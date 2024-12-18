@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <title>3D Portfolio</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #75c8ff, #9fffd7); /* Bijelo-sivi gradient */
+      }
+      button {
+          z-index: 1;
+          box-shadow: 0px 4px 6px rgba(140, 140, 194, 0.2);
+          transition: background 0.3s, transform 0.2s;
+      }
+      button:hover {
+          background: linear-gradient(to bottom, #005bbb, #004499);
+          transform: scale(1.05);
+      }
+      /* Glavna pozadina modala */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+    
+      /* Sadržaj modala */
+      .modal-content {
+        background: #ffffff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        animation: fadeIn 0.5s;
+        position: relative;
+        max-height: 60vh; /* Ograničava visinu na 80% visine ekrana */
+        overflow: auto;   /* Dodaje skrolanje ako je sadržaj veći */
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .modal-content h1{
+        color: #005bbb;
+      }
+
+      .modal-content h2{
+        color: #166cc9;
+      }
+      
+            /* Stilizacija liste unutar modala */
+      /* Stilizacija liste unutar modala */
+      .modal-content ul {
+        list-style-position: inside; /* Pomakni bullet točke bliže tekstu */
+        padding-left: 0;             /* Ukloni dodatni padding ul elementa */
+        margin-left: 0;   
+      }
+
+      .modal-content li {
+        margin: 5px 0;               /* Postavi manji vertikalni razmak između stavki */
+        padding-left: 5px;    
+      }
+      .modal-content.skill ul{
+        list-style: none; /* Ukloni defaultne bullet točke */
+        padding: 0;
+        margin: 0;
+      }
+
+      .modal-content.skill li{
+        display: flex; /* Flexbox za horizontalno poravnanje */
+        justify-content: space-between; /* Razmak između imena vještine i točkica */
+        align-items: center; /* Vertikalno centriranje */
+        margin: 10px 0; /* Razmak između stavki */
+      }
+      .skill-name {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .dots {
+        display: flex; /* Postavi točkice horizontalno */
+        gap: 5px; /* Razmak između točkica */
+      }
+
+      .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #ddd; /* Siva boja za prazne točke */
+      }
+
+      .dot.filled {
+        background-color: #0078ff; /* Plava boja za popunjene točke */
+      }
+
+
+      /* Zatvaranje modala (X gumb) */
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 25px;
+        font-weight: bold;
+        color: #333;
+        cursor: pointer;
+      }
+    
+      .close-button:hover {
+        color: #0078ff;
+      }
+    
+      /* Slika unutar modala */
+      .modal-image {
+        width: 100%;
+        max-width: 200px;
+        margin-top: 10px;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .hidden{
+        display: none;
+      }
+    
+      /* Responzivnost */
+      @media (max-width: 600px) {
+        .modal-content {
+          width: 95%;
+          padding: 15px;
+        }
+    
+        .close-button {
+          font-size: 20px;
+          top: 5px;
+          right: 10px;
+        }
+      }
+    
+      /* Animacija */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Stil za animirani naslov */
+      .animated-title {
+        position: absolute;
+        top: 20px; /* Postavi naslov na vrh stranice */
+        left: 50%; /* Centriraj naslov horizontalno */
+        transform: translateX(-50%); /* Poravnaj naslov prema sredini */
+        z-index: 1; /* Prikaži iznad ostalih elemenata */
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        font-size: 2.5rem; /* Veličina naslova */
+        font-weight: bold;
+        color: #0078ff;
+        animation: fadeInUp 2s ease-out;
+      }
+      .animated-title h1 {
+        font-family: 'Great Vibes', cursive; /* Krasopisni font */
+        font-size: 3.5rem; /* Povećaj veličinu teksta za bolji učinak */
+        color: #0d3edf; /* Promijeni boju za elegantan izgled */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Dodaj suptilnu sjenu */
+        font-weight: 450;
+        
+      }
+      
+      /* Animacija za fade-in i pomak prema gore */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px); /* Početni pomak dolje */
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0); /* Završna pozicija */
+        }
+      }
+
+
+            /* Mala slika unutar modala */
+      .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .thumbnail {
+        width: 100px; /* Veličina malog kvadrata */
+        height: 100px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: transform 0.2s ease;
+      }
+
+      .thumbnail:hover {
+        transform: scale(1.1); /* Povećanje na hover */
+      }
+
+      /* Modal za punu rezoluciju slike */
+      .image-modal {
+        display: none; /* Skriveno dok nije aktivno */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1001;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .full-image {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 8px;
+      }
+
+      .close-image-modal {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        z-index: 1002;
+      }
+
+      .close-image-modal:hover {
+        color: #ff6f61;
+      }
+      
+      .work-in-progress {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.7); /* Poluprozirna pozadina */
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        z-index: 1000; /* Prikaz iznad ostalih elemenata */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      }
+      
+      .project button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(to right, #5eace0, #267ae7); /* Zeleni gradijent */
+        border: none;
+        border-radius: 25px; /* Zaobljeni rubovi */
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Suptilna sjena */
+      }
+      
+      .project button:hover {
+        transform: scale(1.1); /* Povećanje na hover */
+        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* Pojačana sjena na hover */
+        background: linear-gradient(to right, #2d6488, #224f8a); /* Promjena boje na hover */
+      }
+      
+      .project button:active {
+        transform: scale(1.05); /* Lagano smanjenje na klik */
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); /* Smanjena sjena na klik */
+      }
+      
+    </style>
+</head>
+<body>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      function openImageModal(src) {
+        const imageModal = document.getElementById('image-modal');
+        const fullImage = document.getElementById('full-image');
+        fullImage.src = src; // Postavi izvor slike
+        imageModal.style.display = 'flex'; // Prikaži modal
+      }
+      
+      function closeImageModal() {
+        const imageModal = document.getElementById('image-modal');
+        imageModal.style.display = 'none'; // Sakrij modal
+      }
+      
+    </script>
+    <div class="animated-title">
+      <h1>Portfolio Karlo Filipović</h1>
+    </div>
+    
+
+    <div id="Personal-Info-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+        <h1>Personal Info</h1>
+        <h2>About me</h2>
+        <p>
+          My full name is <strong>Patrick Karlo Filipovic</strong>, though everybody calls me <strong>Karlo</strong>. <br>
+          I was born on <strong>December 13th, 2003</strong> in Zagreb, Croatia. <br>
+          I am really passionate about <strong>programming and PC building</strong>.  <br>
+          I used to be a wrestler but due to an unfortunate back injury I had to give up my wrestling dream :( <br>
+          <strong>Ever since I can remember computers and technology in general had a special place in my heart</strong>... I made 
+          my first program (snake) when I was 8 years old and haven't stopped since.
+        </p>
+        <img src="profile.jpg" alt="Profile Image" class="modal-image" />
+      </div>
+    </div>
+
+    <div id="Education-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+        <h1>Education</h1>
+        <h2>Elementary and Highschool</h2>
+        <p>
+          I went to a small elementary school called 'Osnovna skola Klinca Sela'. Even then my best grades were from Computer Science. <br>
+          My Highschool was 'Elektrotehnicka skola Zagreb'. Some of the subjects worth mentioning were: <strong>Algorithms and programming</strong> (C, C++),
+          <strong>Advanced and Object Oriented Programming</strong> (Java), <strong>Microcontroller programming</strong> (IoT),
+          <strong>Advanced Databases</strong> (SQL), <strong>Security of Information Systems</strong>, 
+          <strong>Web Development</strong>(HTML, CSS, JS)...
+        </p>
+        <h2>College?</h2>
+        <p>I finished one year of 'Visoko Uciliste Algebra' but due to large volume of work and some personal issues, I
+          unfortunately had to give up on my college education for the time being...
+        </p>
+        <h2>Courses and Certificates</h2>
+        <p>I am currently in the proccess of finishing <strong>The FullStack Web Developer Course</strong> on Udemy.
+        When I am done with that course, I want to look into some other courses like Android App Development.
+        </p>
+        <h2>School Competitions</h2>
+        <p>I attempted the <strong>Reply Code Challenge</strong> competition, my team and I did decently, we were placed 31/800.
+        I also participated in <strong>Inova Mladih</strong> competition (Competition for young innovators) where I made a game
+        and placed <strong>3rd both in nationals and internationals</strong>! My team and I also participated in a 
+        <strong>ChatBot</strong> competition hosted by Infobip. We made a bot that would connect students and let them
+        exchange knowledge on certain subjects. We placed <strong>2nd in nation</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div id="Experience-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+        <h1>Experience</h1>
+        <h2>Work Experience</h2>
+        <ul>
+          <li>Warehouse worker at Ciak Auto</li>
+          <li>Office Equipment and Printer technician at Eurocop</li>
+          <li>Student worker at Croatian Mint</li>
+          <li>Programming Teacher at Coding Giants (Java, C#, Python, Lua, HTML+CSS+JS, SQL)</li>
+          <li>Smart House and Automation programmer at inControl (Raspberry Pi, Arduino, ABB, Crestron, Savant...)</li>
+          <li>Warehouse worker at Lesnina</li>
+        </ul>
+        <p>In my free time I make a lot of projects for my 'clients', <strong>web apps, mobile apps, computer apps</strong>...</p>
+      </div>
+    </div>
+
+    <div id="Skills-modal" class="modal hidden">
+      <div class="modal-content skill">
+        <span class="close-button" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+        <h1>Skills</h1>
+        <h2>Computer skills</h2>
+        <ul>
+          <li>
+            <div class="skill-name">C, C++</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">Java, JavaSpring</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">C#, .NET</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">HTML, CSS, JS, PHP</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">Node.js, React.js</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">Python</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">SQL</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">Office 365</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+            </div>
+          </li>
+        </ul>
+        <h2>Other skills</h2>
+        <ul>
+          <li>
+            <div class="skill-name">English</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">Communication</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+            </div>
+          </li>
+          <li>
+            <div class="skill-name">Teamwork</div>
+            <div class="dots">
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot filled"></span>
+              <span class="dot"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="Projects-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+        <h1>Projects</h1>
+        <h2>Programming projects</h2>
+        <div class="project">
+          <h3>GrowWithU Website</h3>
+          <p>GrowWithU is a website created using <strong>HTML, CSS, Javascript</strong> and a little bit of <strong>PHP</strong>. 
+           Website is completely responsive, PHP was used so that administrators can edit, add, remove website testimonials.</p>
+          <button onclick="openImageModal('./src/assets/images/growWithU.png')">Show Image</button>
+        </div>
+
+        <div class="project">
+          <h3>Python script for TikTokLive</h3>
+          <p>I made a python script for my friend who live streams on TikTok. Point of the script is simple,
+            whenever someone gifts, follows, likes etc. the live creator, something can happen in game (do a 180, do an emote, Alt+F4...).
+            It was my first attempt at using the <strong>TikTokLive github library</strong>, made to work from console.
+          </p>
+          <button onclick="openImageModal('./src/assets/images/pythonTiktok.png')">Show Image</button>
+        </div>
+
+        <div class="project">
+          <h3>Speech recognition project</h3>
+          <p>My first attempt at <strong>Python speech recognition</strong>. When ever the user said skip, program would automatically
+            press left mouse click. It was made to work from console.
+          </p>
+          <button onclick="openImageModal('./src/assets/images/speechrec.png')">Show Image</button>
+        </div>
+
+        <div class="project">
+          <h3>TikTok Action Web project</h3>
+          <p><strong>TikTokLive Node.js </strong> project. I made a working website where user can select the event,
+             what happens when event occurs and the amount of events required for action to take place.
+          </p>
+          <button onclick="openImageModal('./src/assets/images/TikAction.png')">Show Image</button>
+        </div>
+
+        <div class="project">
+          <h3>Tikkit project</h3>
+          <p>Tikkit application is an application created using <strong>C# .NET Framework</strong>, used for scraping TikTok
+            streams, and performing certain actions when events occur. User can select the tiktok username, events, amounts of 
+            events and actions. It is still a work in progress, I still need to make the tables look nice...
+          </p>
+          <button onclick="openImageModal('./src/assets/images/Tikkit.png')">Show Image</button>
+        </div>
+
+        <div class="project">
+          <h3>Voice Control project</h3>
+          <p>Voice Control project is a <strong>Python gui</strong> project. Idea is, you use the first input to select the word that is 
+            required for an action to occur, select the action from dropdown and when you press start, program listens for certain
+             words and when it hears them, does a specific action.
+          </p>
+          <button onclick="openImageModal('./src/assets/images/Voice Control.png')">Show Image</button>
+        </div>
+        <h2>More projects?</h2>
+        <p>Unfortunately, I have a weird habbit, usually when I'm done with a project, I feel good, try to make it better and delete it.
+          That is why I placed only a couple projects here... Every single project that you are interested in, feel free to
+          contact me, I can send you some source code.
+        </p>
+      </div>
+    </div>
+
+    <div id="Contact-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+        <h1>Contact</h1>
+        <h2>Email</h2>
+        <p>karlo.filipovic.ets@gmail.com</p>
+        <h2>Phone</h2>
+        <p>+385 92 380 7606</p>
+        <br><br>
+        <p>Feel free to contact me when ever. I am available most of the time! Thank you for trying
+          out my portfolio project, hope you liked it! :)
+        </p>
+      </div>
+    </div>
+
+
+<!-- IMAGE MODALS -->
+
+<div id="image-modal" class="image-modal">
+  <span class="close-image-modal" onclick="closeImageModal()">&times;</span>
+  <img id="full-image" class="full-image" src="" alt="Full Resolution Image" />
+</div>
+
+<div class="work-in-progress">Work in Progress, please use a PC for best results!</div>
+
+</body>
+</html>
